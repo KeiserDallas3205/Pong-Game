@@ -10,6 +10,8 @@ TagManager:
   - leftBoundary
   - rightBoundary
   - topBottomBoundary
+  - leftScore
+  - rightScore
   layers:
   - Default
   - TransparentFX
