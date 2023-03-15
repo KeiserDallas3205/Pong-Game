@@ -12,6 +12,8 @@ TagManager:
   - topBottomBoundary
   - leftScore
   - rightScore
+  - topWarp
+  - bottomWarp
   layers:
   - Default
   - TransparentFX

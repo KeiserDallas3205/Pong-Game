@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Paddle : MonoBehaviour
@@ -43,6 +41,17 @@ public class Paddle : MonoBehaviour
 				transform.Translate(-Vector3.up * speed * Time.deltaTime);
 			}
 		}
+		
         
+    }
+
+    void OnCollisionEnter2D(Collision2D c){
+		if (c.gameObject.CompareTag("topWarp")) {
+			transform.position = new Vector3(transform.position.x, -5f, transform.position.z);
+		}
+
+        else if (c.gameObject.CompareTag("bottomWarp")) {
+            transform.position = new Vector3(transform.position.x, 5f, transform.position.z);
+        }
     }
 }
