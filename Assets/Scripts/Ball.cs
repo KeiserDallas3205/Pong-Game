@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro; // UI for scoreboard
 public class Ball : MonoBehaviour
@@ -20,6 +18,10 @@ public class Ball : MonoBehaviour
 	 // Scoreboard values
 	 private int leftScore;
 	 private int rightScore;
+
+	// Audio values
+	public AudioClip[] sounds;
+	 private AudioSource audioSrc;
    
     // Start is called before the first frame update
     void Start()
@@ -52,6 +54,9 @@ public class Ball : MonoBehaviour
 		else{
 			dir.y = -1;
 		}
+
+		audioSrc = GetComponent<AudioSource>();
+		
         
     }
 
@@ -67,6 +72,8 @@ public class Ball : MonoBehaviour
 		// Paddle (left/right)
 		if(c.gameObject.transform.tag.EndsWith("Paddle")){
 			dir.x *= -1;
+			audioSrc.clip = sounds[Random.Range(0, sounds.Length)];
+			audioSrc.Play();
 		}
 		else if(c.gameObject.CompareTag("topBottomBoundary")){
 			dir.y *= -1;
