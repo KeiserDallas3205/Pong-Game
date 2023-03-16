@@ -6,17 +6,20 @@ public class Paddle : MonoBehaviour
 	[SerializeField]
 	private float speed = 0.01f;
 	
+	// Sprite List 
+	public Sprite[] paddles;
+	private int rand;
+	
     // Start is called before the first frame update
     void Start(){
+		
         // Set the colors for left and right paddles
-		if(transform.CompareTag("leftPaddle")){
-			
-			  GetComponent<SpriteRenderer>().color = new Color(1, 0,0);
+		if(transform.CompareTag("leftPaddle") || transform.CompareTag("rightPaddle")){
+			rand = Random.Range(0,paddles.Length);
+			GetComponent<SpriteRenderer>().sprite = paddles[rand];	
+		
 		}
-		else if(transform.CompareTag("rightPaddle")){
-			
-			  GetComponent<SpriteRenderer>().color = new Color(0, 0, 1);
-		}
+		
     }
 
     // Update is called once per frame

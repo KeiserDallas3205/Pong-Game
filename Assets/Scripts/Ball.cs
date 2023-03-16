@@ -20,8 +20,12 @@ public class Ball : MonoBehaviour
 	 private int rightScore;
 
 	// Audio values
-	public AudioClip[] sounds;
+	 public AudioClip[] sounds;
 	 private AudioSource audioSrc;
+	 
+	 // Sprite list
+	 public Sprite[] balls;
+	 private int rand;
    
     // Start is called before the first frame update
     void Start()
@@ -31,9 +35,10 @@ public class Ball : MonoBehaviour
 		txtLeftScore.text = leftScore.ToString();
 		txtRightScore.text = rightScore.ToString();
 		
-		// Set the color of the ball 
-		 GetComponent<SpriteRenderer>().color = new Color(0,1,0);
-		 
+		// Set the sprite for the ball
+		rand = Random.Range(0,balls.Length);
+		GetComponent<SpriteRenderer>().sprite = balls[rand];
+		
 		 // Get the original position for restart
 		 origPos = transform.position;
 		 
@@ -54,10 +59,12 @@ public class Ball : MonoBehaviour
 		else{
 			dir.y = -1;
 		}
-
+		
+		// Get audio source
 		audioSrc = GetComponent<AudioSource>();
 		
-        
+       
+		
     }
 
     // Update is called once per frame
