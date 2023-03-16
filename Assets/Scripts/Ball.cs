@@ -26,6 +26,9 @@ public class Ball : MonoBehaviour
 	 // Sprite list
 	 public Sprite[] balls;
 	 private int rand;
+	 
+	 // Explosion for wall
+	public GameObject goal;
    
     // Start is called before the first frame update
     void Start()
@@ -86,6 +89,9 @@ public class Ball : MonoBehaviour
 			dir.y *= -1;
 		}
 		else if(c.gameObject.CompareTag("leftBoundary")){
+			// Goal Explosion
+			var temp = Instantiate(goal, c.contacts[0].point, Quaternion.identity);
+			Destroy(temp, 1.0f);
 			// Increase right score
 			rightScore++;
 			txtRightScore.text = rightScore.ToString();
@@ -94,6 +100,9 @@ public class Ball : MonoBehaviour
 			transform.position = origPos;
 		}
 		else if (c.gameObject.CompareTag("rightBoundary")){
+			// Goal explosion
+			var temp = Instantiate(goal, c.contacts[0].point, Quaternion.identity);
+			Destroy(temp, 1.0f);
 			// Increase left score
 			leftScore++;
 			txtLeftScore.text = leftScore.ToString();
@@ -116,4 +125,6 @@ public class Ball : MonoBehaviour
 		
 		
 	}
+	
+
 }
