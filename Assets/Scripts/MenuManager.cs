@@ -3,6 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public void mainMenu()
+    {
+        print("pressed mainMenu");
+        SceneManager.LoadScene(0);
+    }
+
     public void timedMode()
     {
         print("pressed timedMode");
@@ -20,4 +26,5 @@ public class MenuManager : MonoBehaviour
         print("pressed quit");
         Application.Quit();
     }
+
 }
