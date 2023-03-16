@@ -3,13 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class Menus : MonoBehaviour
 {
+    // ints to choose which scene we're loading
+    public int timedModeScene;
+    public int accelerationModeScene;
+
     public void TimedMode()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(timedModeScene);
     }
     public void AccelerationMode()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(accelerationModeScene);
     }
     public void Quit()
     {
