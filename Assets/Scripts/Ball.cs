@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro; // UI for scoreboard
+using UnityEngine.SceneManagement; // Handles the gamemodes
+
 public class Ball : MonoBehaviour
 {
 	// Scoreboard UI
@@ -7,32 +9,39 @@ public class Ball : MonoBehaviour
 	public TextMeshProUGUI txtRightScore;
 	
 	// Movement speed 
-	 public float speed = 4;
+	public float speed = 4;
 	 
-	 // Starting direction
-	 public Vector2 dir;
+	// Starting direction
+	public Vector2 dir;
 	 
-	 // Starting position
-	 private Vector2 origPos;
+	// Starting position
+	private Vector2 origPos;
 	 
-	 // Scoreboard values
-	 private int leftScore;
-	 private int rightScore;
+	// Scoreboard values
+	private int leftScore;
+	private int rightScore;
 
 	// Audio values
-	 public AudioClip[] sounds;
-	 private AudioSource audioSrc;
+	public AudioClip[] sounds;
+	private AudioSource audioSrc;
 	 
-	 // Sprite list
-	 public Sprite[] balls;
-	 private int rand;
+	// Sprite list
+	public Sprite[] balls;
+	private int rand;
 	 
-	 // Explosion for wall
+	// Explosion for wall
 	public GameObject goal;
+	
+	// Scene reference for game modes
+	private string currentScene;
    
-    // Start is called before the first frame update
+     // Start is called before the first frame update
     void Start()
     {
+		
+		// Get the currrent scene
+		 currentScene = SceneManager.GetActiveScene().name;
+	
 		// Reset the scoreboard
 		leftScore = rightScore = 0;
 		txtLeftScore.text = leftScore.ToString();
@@ -42,8 +51,11 @@ public class Ball : MonoBehaviour
 		rand = Random.Range(0,balls.Length);
 		GetComponent<SpriteRenderer>().sprite = balls[rand];
 		
-		 // Get the original position for restart
-		 origPos = transform.position;
+		// Get the original position for restart
+		origPos = transform.position;
+		
+		// Get audio source
+		audioSrc = GetComponent<AudioSource>();
 		 
 		// Randomly select right/left
 		float result = Random.Range(0f,1f);
@@ -62,12 +74,6 @@ public class Ball : MonoBehaviour
 		else{
 			dir.y = -1;
 		}
-		
-		// Get audio source
-		audioSrc = GetComponent<AudioSource>();
-		
-       
-		
     }
 
     // Update is called once per frame
@@ -84,6 +90,12 @@ public class Ball : MonoBehaviour
 			dir.x *= -1;
 			audioSrc.clip = sounds[Random.Range(0, sounds.Length)];
 			audioSrc.Play();
+			
+			// Accelerated Game Mode
+			if(currentScene == "AccelerationMode"){
+				// Increase the speed of the ball
+				speed *= 1.2f;
+			}
 		}
 		else if(c.gameObject.CompareTag("topBottomBoundary")){
 			dir.y *= -1;
@@ -92,10 +104,12 @@ public class Ball : MonoBehaviour
 			// Goal Explosion
 			var temp = Instantiate(goal, c.contacts[0].point, Quaternion.identity);
 			Destroy(temp, 1.0f);
+			
 			// Increase right score
 			rightScore++;
 			txtRightScore.text = rightScore.ToString();
 			
+			// Handles ball explosion effects, then resets the ball position and speed
 			dir.x *= -1;
 			Invoke("moveBall",0.5f);
 		}
@@ -107,6 +121,7 @@ public class Ball : MonoBehaviour
 			leftScore++;
 			txtLeftScore.text = leftScore.ToString();
 			
+			// Handles ball explosion effects, then resets the ball position and speed
 			dir.x *= -1;
 			Invoke("moveBall",0.5f);
 		}
@@ -126,9 +141,11 @@ public class Ball : MonoBehaviour
 		
 	}
 	
+	// Moves the ball to original position
 	public void moveBall(){
 			// Restart game
 			transform.position = origPos;
+			speed = 4f;
 		
 	}
 	
