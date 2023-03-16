@@ -131,15 +131,17 @@ public class Ball : MonoBehaviour
 		// 7 - 0 skunk
 		if((leftScore == 7 &&  rightScore == 0) || (rightScore == 7 && leftScore == 0)){
 			print("Game Over");
+			SceneManager.LoadScene(4);
 		}
 		// Maximum points reached 
 		else if(leftScore == 10 || rightScore == 10){
 			print("Game Over");
-		}
-		// Timer elapsed
-		
-		
-	}
+            SceneManager.LoadScene(4);
+        }
+        // Timer elapsed
+
+
+    }
 	
 	// Moves the ball to original position
 	public void moveBall(){
