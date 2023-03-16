@@ -96,8 +96,8 @@ public class Ball : MonoBehaviour
 			rightScore++;
 			txtRightScore.text = rightScore.ToString();
 			
-			// Restart game
-			transform.position = origPos;
+			dir.x *= -1;
+			Invoke("moveBall",0.5f);
 		}
 		else if (c.gameObject.CompareTag("rightBoundary")){
 			// Goal explosion
@@ -107,8 +107,8 @@ public class Ball : MonoBehaviour
 			leftScore++;
 			txtLeftScore.text = leftScore.ToString();
 			
-			// Restart game
-			transform.position = origPos;
+			dir.x *= -1;
+			Invoke("moveBall",0.5f);
 		}
 		
 		
@@ -123,6 +123,12 @@ public class Ball : MonoBehaviour
 		}
 		// Timer elapsed
 		
+		
+	}
+	
+	public void moveBall(){
+			// Restart game
+			transform.position = origPos;
 		
 	}
 	
