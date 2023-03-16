@@ -2090,6 +2090,7 @@ MonoBehaviour:
   balls:
   - {fileID: 790710496, guid: e62650bac170745f1bf2bfeda0cea082, type: 3}
   - {fileID: -636000725, guid: e62650bac170745f1bf2bfeda0cea082, type: 3}
+  goal: {fileID: 1740360412178842069, guid: 27715885edc65a647b6439172bfc0afb, type: 3}
 --- !u!212 &1718965273
 SpriteRenderer:
   m_ObjectHideFlags: 0
