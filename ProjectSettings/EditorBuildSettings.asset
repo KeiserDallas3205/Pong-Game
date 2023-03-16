@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TimedMode.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/AccelerationMode.unity
+    guid: 7e54a6bdd66ce476dba30fc79c2d6fae
   m_configObjects: {}
